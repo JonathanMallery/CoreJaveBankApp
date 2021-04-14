@@ -150,6 +150,7 @@ public class DollarsBankController {
 							"\nContant Number: " + customer.getContactNumber() + 
 							"\nUsername: " + customer.getUsername() + 
 							"\nPassword: " + customer.getPassword());
+		System.out.println("----------------\n");
 	
 		return true;
 	}
@@ -158,7 +159,7 @@ public class DollarsBankController {
 		Account account = findAccountByAccountId(accountId);
 		ArrayList<Transaction> transactionOpt = (ArrayList<Transaction>) this.transactions.stream()
 																						.filter(t -> t.getAccountId() == account.getAccountId())
-																						.collect(lastN(5));
+																						.collect(lastN(5)); // this is where i use helper static method lastN(int n)
 		if(!transactionOpt.isEmpty()) {
 			return transactionOpt;
 		} else {
@@ -168,16 +169,17 @@ public class DollarsBankController {
 	}
 	
 	public static <T> Collector<T, ?, List<T>> lastN(int n) {
-	    return Collector.<T, Deque<T>, List<T>>of(ArrayDeque::new, (acc, t) -> {
-	        if(acc.size() == n)
-	            acc.pollFirst();
-	        acc.add(t);
-	    }, (acc1, acc2) -> {
-	        while(acc2.size() < n && !acc1.isEmpty()) {
-	            acc2.addFirst(acc1.pollLast());
-	        }
-	        return acc2;
-	    }, ArrayList::new);
+	    return Collector.<T, Deque<T>, List<T>>of(ArrayDeque::new, (acc, t) -> { 
+	    																		if(acc.size() == n) acc.pollFirst();
+																		        acc.add(t);
+																		        }
+	    														 , (acc1, acc2) -> {
+																				     while(acc2.size() < n && !acc1.isEmpty()) {
+																				          acc2.addFirst(acc1.pollLast());
+																				        }
+																			        return acc2;
+																			        }
+	    														 , ArrayList::new);
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.dollarsbank.utility;
 public class ColorsUtility {
 
 	 // Regular Colors
+	public static final String TEXT_RESET = "\u001B[0m"; // Back to default color according to theme
     public static final String BLACK = "\033[0;30m";   // BLACK
     public static final String RED = "\033[0;31m";     // RED
     public static final String GREEN = "\033[0;32m";   // GREEN

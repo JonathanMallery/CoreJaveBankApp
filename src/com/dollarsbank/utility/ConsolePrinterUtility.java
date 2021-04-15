@@ -9,6 +9,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.dollarsbank.controller.DollarsBankController;
 import com.dollarsbank.model.Account;
 import com.dollarsbank.model.Customer;
@@ -78,14 +81,28 @@ public class ConsolePrinterUtility {
 		System.out.print(ColorsUtility.TEXT_RESET + "Address: \n");
 		address = scan.nextLine();
 		
-		System.out.print(ColorsUtility.TEXT_RESET + "Customer Contact Number: \n");
+		while(true) {
+		System.out.print(ColorsUtility.TEXT_RESET + "Customer Contact Number: * Follow format ###-###-#### *\n");
 		contactNumber = scan.nextLine();
+			if(contactNumber.isBlank() || !isValidContactNumber(contactNumber)) {
+				System.out.println(ColorsUtility.RED + "Invalid Phone Number. ");
+			} else {
+				break;
+			}
+		}
 		
 		System.out.print(ColorsUtility.TEXT_RESET + "User Id: \n");
 		username = scan.nextLine();
 		
-		System.out.print(ColorsUtility.TEXT_RESET + "Password : *8 Characters Long Including Lower, Upper & Special Characters* \n");
-		password = scan.nextLine();
+		while(true) {
+			System.out.print(ColorsUtility.TEXT_RESET + "Password : {At least 8 characters long and must include at least one Lower, Upper & Special Characters except '*'} \n");
+			password = scan.nextLine();
+			if(isValidPassword(password)) {
+				break;
+			} else {
+				System.out.println(ColorsUtility.RED + "Invalid Password.");
+			}
+		}
 		
 		System.out.print(ColorsUtility.TEXT_RESET + "Initial Deposit Amount: \n");
 		while(true) {
@@ -312,6 +329,55 @@ public class ConsolePrinterUtility {
 //		scan.close();
 		runProgram(dbc);
 	}
+	
+	public static boolean isValidPassword(String password){
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+  
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+  
+        // If the password is empty
+        // return false
+        if (password == null) {
+            return false;
+        }
+  
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(password);
+  
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
+    }
+	
+	public static boolean isValidContactNumber(String contactNumber){
+        // Regex to check valid contact number.
+        String regex = "^\\d{3}-\\d{3}-\\d{4}$";
+  
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+  
+        // If the contactNumber is empty
+        // return false
+        if (contactNumber == null) {
+            return false;
+        }
+  
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(contactNumber);
+  
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
+    }
 	
 }
 

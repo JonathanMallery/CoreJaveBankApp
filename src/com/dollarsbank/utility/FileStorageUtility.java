@@ -158,7 +158,7 @@ public class FileStorageUtility {
 				try {
 				 String[] arr = line.split(",");
 				 int transactionId = Integer.parseInt(arr[0].trim());
-				 int accountId = Integer.parseInt(arr[0].trim());
+				 int accountId = Integer.parseInt(arr[1].trim());
 				 String description = arr[2].trim();
 				 
 				 Transaction transaction = new Transaction(transactionId, accountId, description);

@@ -39,6 +39,13 @@ public class DollarsBankController {
 		
 	}
 	
+	public boolean updateFiles() {
+		updateAccountsFile();
+		updateCustomersFile();
+		updateTransactionsFile();
+		return true;
+	}
+	
 	public boolean addAccount(Account account) {
 		this.accounts.add(account);
 		updateAccountsFile();
@@ -114,11 +121,14 @@ public class DollarsBankController {
 		if (account == null) {
 			return false;
 		}
+		Customer customer = findCustomerByCustomerId(account.getCustomerId());
 		
 		System.out.println("----------------");
 		System.out.println("Account Id: " + account.getAccountId() + 
 							"\nBalance: " + account.getBalance() + 
-							"\nCustomer Id: " + account.getCustomerId());
+							"\nCustomer Id: " + account.getCustomerId() +
+							"\nCustomer : " + customer.getFirstname() + " " + customer.getLastname() +
+							"\nUsername: " + customer.getUsername());
 	
 		return true;
 	}

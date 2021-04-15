@@ -1,6 +1,6 @@
 CustomerId,FirstName,LastName,Address,Contact Number,Username,Password
-1,Jonathan,Mallery,At my folks,5041234567,jmall,jmall
-2,Peppa,Pig,PBS channel,1234567890,pp,pp
-3,Sister,Act,movie,7778889999,sista,sista
-4,Taco,Tuesday,TacoBell,800tacobell,taco,taco
-5,Vikram,Boss,Everywhere,142456789,VBoss,123456
+1,Jonathan,Mallery,The Moon,111-222-3333,jmall,Jmall$77
+2,Vikram,Boss,The Throne,777-888-9999,vboss,Vboss123#
+3,Peppa,Pig,PBS Kids,123-456-7890,pep,PeppaPig%1
+4,Test,Test,Test,111-111-1111,test,Test1234^
+5,jmall,Jmall$77,oops,111-111-1111,j,myBad111&

@@ -95,7 +95,7 @@ public class ConsolePrinterUtility {
 		username = scan.nextLine();
 		
 		while(true) {
-			System.out.print(ColorsUtility.TEXT_RESET + "Password : {At least 8 characters long and must include at least one Lower, Upper & Special Characters except '*'} \n");
+			System.out.print(ColorsUtility.TEXT_RESET + "Password : {At least 8 characters long and must include at least one Lower, Upper & Special Characters except '*' '!'} \n");
 			password = scan.nextLine();
 			if(isValidPassword(password)) {
 				break;
@@ -140,11 +140,17 @@ public class ConsolePrinterUtility {
 	}
 	
 	public static void loginAccount(Scanner scan, DollarsBankController dbc) {
+		
+		if(dbc.accounts.isEmpty()){
+			System.out.println(ColorsUtility.RED + "There are currently no accounts" + ColorsUtility.TEXT_RESET );
+			runProgram(dbc);
+		}
 		System.out.println(ColorsUtility.BLUE +"+---------------------+");
 		System.out.println(ColorsUtility.BLUE +"| Enter Login Details |");
 		System.out.println(ColorsUtility.BLUE +"+---------------------+");
 		String username = "";
 		String password = "";
+		
 		
 		System.out.print(ColorsUtility.TEXT_RESET + "User Id: \n");
 		username = scan.nextLine();
@@ -191,6 +197,9 @@ public class ConsolePrinterUtility {
 			try {
 				switch (command) {
 				case 1:
+					System.out.println(ColorsUtility.BLUE +"+----------------------+");
+					System.out.println(ColorsUtility.BLUE +"| Deposit Transaction: |");
+					System.out.println(ColorsUtility.BLUE +"+----------------------+");
 					System.out.println(ColorsUtility.TEXT_RESET + "Enter deposit amount : ");
 					while(true) {
 						try {
@@ -209,6 +218,7 @@ public class ConsolePrinterUtility {
 							if(dbc.addTransaction(transaction)) {
 								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
+								dbc.updateFiles();
 								System.out.println("Transaction completed successfully");
 							} else {
 								System.out.println("Failed to add New Account.\n\n");
@@ -221,9 +231,9 @@ public class ConsolePrinterUtility {
 					}
 					break;
 				case 2:
-					System.out.println(ColorsUtility.BLUE +"+----------------------+");
-					System.out.println(ColorsUtility.BLUE +"| Deposit Transaction: |");
-					System.out.println(ColorsUtility.BLUE +"+----------------------+");
+					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
+					System.out.println(ColorsUtility.BLUE +"| Withdrawal Transaction: |");
+					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
 					System.out.println(ColorsUtility.TEXT_RESET + "Enter withdrawal amount : ");
 					while(true) {
 						try {
@@ -242,6 +252,7 @@ public class ConsolePrinterUtility {
 							if(dbc.addTransaction(transaction)) {
 								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
+								dbc.updateFiles();
 								System.out.println("Transaction completed successfully");
 							}
 							break;
@@ -252,9 +263,9 @@ public class ConsolePrinterUtility {
 					}
 					break;
 				case 3:
-					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
-					System.out.println(ColorsUtility.BLUE +"| Withdrawal Transaction: |");
-					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
+					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
+					System.out.println(ColorsUtility.BLUE +"| Transfer Transaction: |");
+					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
 					System.out.println(ColorsUtility.TEXT_RESET + "Enter transfer amount : ");
 					double transfer = scan.nextDouble();
 					scan.nextLine();
@@ -292,6 +303,7 @@ public class ConsolePrinterUtility {
 								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
 								System.out.println(transferTransaction.toString());
+								
 								System.out.println("Transaction completed successfully");
 							}
 							break;

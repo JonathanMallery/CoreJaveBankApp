@@ -24,10 +24,10 @@ public class ConsolePrinterUtility {
 			System.out.println(ColorsUtility.BLUE +"+------------------------+");
 			System.out.println(ColorsUtility.BLUE +"| Welcome to DOLLARSBANK |");
 			System.out.println(ColorsUtility.BLUE +"+------------------------+");
-			System.out.println(ColorsUtility.BLACK +"1. Create New Account");
-			System.out.println(ColorsUtility.BLACK +"2. Login");
-			System.out.println(ColorsUtility.BLACK +"3. Exit");
-			System.out.println(ColorsUtility.GREEN +"\nEnter Choice (1, 2, or 3) : ");
+			System.out.println(ColorsUtility.TEXT_RESET + "1. Create New Account");
+			System.out.println(ColorsUtility.TEXT_RESET + "2. Login");
+			System.out.println(ColorsUtility.TEXT_RESET + "3. Exit");
+			System.out.println(ColorsUtility.GREEN + "\nEnter Choice (1, 2, or 3) : " + ColorsUtility.TEXT_RESET);
 			// Read Command, run through exception
 			String choice = scan.nextLine();
 			
@@ -37,10 +37,10 @@ public class ConsolePrinterUtility {
 					createNewAccount(scan, dbc);
 					break;
 				case "2":
-						loginAccount(scan, dbc);				
+					loginAccount(scan, dbc);				
 					break;
 				case "3":
-					System.out.println("Have a nice day!!");
+					System.out.println(ColorsUtility.PURPLE + "Have a nice day!!");
 					running = false;
 //					Executors.newSingleThreadScheduledExecutor().schedule(() -> System.exit(0), 3, TimeUnit.SECONDS);
 					break;
@@ -67,27 +67,27 @@ public class ConsolePrinterUtility {
 		String password = "";
 		double initialDeposit;
 		
-		System.out.print(ColorsUtility.BLACK +"Customer First Name: ");
+		System.out.print(ColorsUtility.TEXT_RESET + "Customer First Name: ");
 		System.out.println();
 		firstName = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Customer Last Name: ");
+		System.out.print(ColorsUtility.TEXT_RESET + "Customer Last Name: ");
 		System.out.println();
 		lastName = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Address: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "Address: \n");
 		address = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Customer Contact Number: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "Customer Contact Number: \n");
 		contactNumber = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"User Id: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "User Id: \n");
 		username = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Password : *8 Characters Long Including Lower, Upper & Special Characters* \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "Password : *8 Characters Long Including Lower, Upper & Special Characters* \n");
 		password = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Initial Deposit Amount: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "Initial Deposit Amount: \n");
 		while(true) {
 			try {
 			
@@ -129,10 +129,10 @@ public class ConsolePrinterUtility {
 		String username = "";
 		String password = "";
 		
-		System.out.print(ColorsUtility.BLACK +"User Id: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "User Id: \n");
 		username = scan.nextLine();
 		
-		System.out.print(ColorsUtility.BLACK +"Password: \n");
+		System.out.print(ColorsUtility.TEXT_RESET + "Password: \n");
 		password = scan.nextLine();
 		
 		int accountId;
@@ -162,19 +162,19 @@ public class ConsolePrinterUtility {
 			System.out.println(ColorsUtility.BLUE + "+---------------------+");
 			System.out.println(ColorsUtility.BLUE +"| Welcome Customer!!! |");
 			System.out.println(ColorsUtility.BLUE +"+---------------------+");
-			System.out.println(ColorsUtility.BLACK +"1. Deposit");
-			System.out.println(ColorsUtility.BLACK +"2. Withdraw");
-			System.out.println(ColorsUtility.BLACK +"3. Funds Transfer");
-			System.out.println(ColorsUtility.BLACK +"4. View 5 Recent Transactions");
-			System.out.println(ColorsUtility.BLACK +"5. Display Customer Information");
-			System.out.println(ColorsUtility.BLACK +"6. Sign Out");
-			System.out.println(ColorsUtility.GREEN +"\nEnter Choice (1, 2, 3, 4, 5, or 6) :");
+			System.out.println(ColorsUtility.TEXT_RESET + "1. Deposit");
+			System.out.println(ColorsUtility.TEXT_RESET + "2. Withdraw");
+			System.out.println(ColorsUtility.TEXT_RESET + "3. Funds Transfer");
+			System.out.println(ColorsUtility.TEXT_RESET + "4. View 5 Recent Transactions");
+			System.out.println(ColorsUtility.TEXT_RESET + "5. Display Customer Information");
+			System.out.println(ColorsUtility.TEXT_RESET + "6. Sign Out");
+			System.out.println(ColorsUtility.GREEN +"\nEnter Choice (1, 2, 3, 4, 5, or 6) :" + ColorsUtility.TEXT_RESET);
 			int command = scan.nextInt();
 			
 			try {
 				switch (command) {
 				case 1:
-					System.out.println(ColorsUtility.BLACK +"Enter deposit amount : ");
+					System.out.println(ColorsUtility.TEXT_RESET + "Enter deposit amount : ");
 					while(true) {
 						try {
 						
@@ -190,7 +190,7 @@ public class ConsolePrinterUtility {
 																													"Balance - " + account.getBalance() + " as of " +
 																													df.format(date));
 							if(dbc.addTransaction(transaction)) {
-								System.out.println();
+								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
 								System.out.println("Transaction completed successfully");
 							} else {
@@ -207,7 +207,7 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+----------------------+");
 					System.out.println(ColorsUtility.BLUE +"| Deposit Transaction: |");
 					System.out.println(ColorsUtility.BLUE +"+----------------------+");
-					System.out.println(ColorsUtility.BLACK +"Enter withdrawal amount : ");
+					System.out.println(ColorsUtility.TEXT_RESET + "Enter withdrawal amount : ");
 					while(true) {
 						try {
 						
@@ -223,13 +223,13 @@ public class ConsolePrinterUtility {
 																													"Balance - " + account.getBalance() + " as of " +
 																													df.format(date));
 							if(dbc.addTransaction(transaction)) {
-								System.out.println();
+								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
 								System.out.println("Transaction completed successfully");
 							}
 							break;
 						} catch (InputMismatchException e) {
-							System.out.println("Incorrect Input. Please enter a number. : ");
+							System.out.println(ColorsUtility.RED + "Incorrect Input. Please enter a number. : ");
 							scan.nextLine();
 						}
 					}
@@ -238,11 +238,11 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
 					System.out.println(ColorsUtility.BLUE +"| Withdrawal Transaction: |");
 					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
-					System.out.println(ColorsUtility.BLACK +"Enter transfer amount : ");
+					System.out.println(ColorsUtility.TEXT_RESET + "Enter transfer amount : ");
 					double transfer = scan.nextDouble();
 					scan.nextLine();
 					
-					System.out.println(ColorsUtility.BLACK +"Enter Accound Id : ");
+					System.out.println(ColorsUtility.TEXT_RESET + "Enter Accound Id : ");
 					int accountNumber = scan.nextInt();
 					scan.nextLine();
 					while(true) {
@@ -272,7 +272,7 @@ public class ConsolePrinterUtility {
 																														df.format(date));
 							
 							if(dbc.addTransaction(transaction) && dbc.addTransaction(transferTransaction)) {
-								System.out.println(ColorsUtility.BLACK);
+								System.out.println(ColorsUtility.TEXT_RESET);
 								System.out.println(transaction.toString());
 								System.out.println(transferTransaction.toString());
 								System.out.println("Transaction completed successfully");
@@ -288,7 +288,7 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+------------------------+");
 					System.out.println(ColorsUtility.BLUE +"| 5 Recent Transactions: |");
 					System.out.println(ColorsUtility.BLUE +"+------------------------+");
-					System.out.println(ColorsUtility.BLACK );
+					System.out.println(ColorsUtility.TEXT_RESET);
 					ArrayList<Transaction> lastFive = dbc.findLastFiveTransactionsByAccountId(account.getAccountId());
 					lastFive.stream().forEach(System.out::println);
 					break;
@@ -296,7 +296,7 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
 					System.out.println(ColorsUtility.BLUE +"| Customer Information: |");
 					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
-					System.out.println(ColorsUtility.BLACK );
+					System.out.println(ColorsUtility.TEXT_RESET);
 					dbc.listCustomer(customer.getCustomerId());
 					break;
 				case 6:

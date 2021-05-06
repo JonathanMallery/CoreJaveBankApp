@@ -255,28 +255,34 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
 					System.out.println(ColorsUtility.BLUE +"| Withdrawal Transaction: |");
 					System.out.println(ColorsUtility.BLUE +"+-------------------------+");
-					System.out.println(ColorsUtility.TEXT_RESET + "Enter withdrawal amount : ");
 					while(true) {
+						System.out.println(ColorsUtility.TEXT_RESET + "Enter withdrawal amount : ");
 						try {
-						
 							double withdraw = scan.nextDouble();
 							scan.nextLine();
 							double balance = account.getBalance();
-							balance = balance - withdraw;
-							account.setBalance(balance);
-							Date date = new Date();
-							DateFormat df = new SimpleDateFormat("EEEE dd/MM/yyyy HH:mm");
-							Transaction transaction = new Transaction(Transaction.generateTransactionId(), account.getAccountId(), "Withdrawal of " + withdraw + 
-																													" in account[" + account.getAccountId() + "]. " +
-																													"Balance - " + account.getBalance() + " as of " +
-																													df.format(date));
-							if(dbc.addTransaction(transaction)) {
-								System.out.println(ColorsUtility.TEXT_RESET);
-								System.out.println(transaction.toString());
-								dbc.updateFiles();
-								System.out.println("Transaction completed successfully");
+							if(balance > withdraw) {
+								balance = balance - withdraw;
+								account.setBalance(balance);
+								Date date = new Date();
+								DateFormat df = new SimpleDateFormat("EEEE dd/MM/yyyy HH:mm");
+								Transaction transaction = new Transaction(Transaction.generateTransactionId(), account.getAccountId(), "Withdrawal of " + withdraw + 
+																														" in account[" + account.getAccountId() + "]. " +
+																														"Balance - " + account.getBalance() + " as of " +
+																														df.format(date));
+								if(dbc.addTransaction(transaction)) {
+									System.out.println(ColorsUtility.TEXT_RESET);
+									System.out.println(transaction.toString());
+									dbc.updateFiles();
+									System.out.println("Transaction completed successfully");
+								} else {
+									System.out.println(ColorsUtility.RED + "Transaction was not recorded" + ColorsUtility.TEXT_RESET);
+								}
+								break;
+							} else {
+								System.out.println(ColorsUtility.RED + "Not enough funds to withdraw that amount" + ColorsUtility.TEXT_RESET);
 							}
-							break;
+							
 						} catch (InputMismatchException e) {
 							System.out.println(ColorsUtility.RED + "Incorrect Input. Please enter a number. : ");
 							scan.nextLine();
@@ -287,47 +293,53 @@ public class ConsolePrinterUtility {
 					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
 					System.out.println(ColorsUtility.BLUE +"| Transfer Transaction: |");
 					System.out.println(ColorsUtility.BLUE +"+-----------------------+");
-					System.out.println(ColorsUtility.TEXT_RESET + "Enter transfer amount : ");
-					double transfer = scan.nextDouble();
-					scan.nextLine();
 					
-					System.out.println(ColorsUtility.TEXT_RESET + "Enter Accound Id : ");
-					int accountNumber = scan.nextInt();
-					scan.nextLine();
 					while(true) {
+						System.out.println(ColorsUtility.TEXT_RESET + "Enter transfer amount : ");
+						double transfer = scan.nextDouble();
+						scan.nextLine();
+						
+						System.out.println(ColorsUtility.TEXT_RESET + "Enter Accound Id : ");
+						int accountNumber = scan.nextInt();
+						scan.nextLine();
 						try {
 							double balance = account.getBalance();
-							balance = balance - transfer;
-							account.setBalance(balance);
-							
-							Account transferAccount = dbc.findAccountByAccountId(accountNumber);
-							double transferAccountBalance = transferAccount.getBalance();
-							transferAccountBalance = transferAccountBalance + transfer;
-							transferAccount.setBalance(transferAccountBalance);
-							
-							
-							Date date = new Date();
-							DateFormat df = new SimpleDateFormat("EEEE dd/MM/yyyy HH:mm");
-							Transaction transaction = new Transaction(Transaction.generateTransactionId(), account.getAccountId(), "Tranfer of " + transfer + 
-																													" from account[" + account.getAccountId() + "] to account[" 
-																													+ transferAccount.getAccountId() + "]. "  +
-																													"Balance - " + account.getBalance() + " as of " +
-																													df.format(date));
-							
-							Transaction transferTransaction = new Transaction(Transaction.generateTransactionId(), transferAccount.getAccountId(), "Tranfer of " + transfer + 
-																														" to account[" + transferAccount.getAccountId() + "] from account[" 
-																														+ account.getAccountId() + "]. "  +
-																														"Balance - " + transferAccount.getBalance() + " as of " +
-																														df.format(date));
-							
-							if(dbc.addTransaction(transaction) && dbc.addTransaction(transferTransaction)) {
-								System.out.println(ColorsUtility.TEXT_RESET);
-								System.out.println(transaction.toString());
-								System.out.println(transferTransaction.toString());
+							if (balance > transfer) {
+								balance = balance - transfer;
+								account.setBalance(balance);
 								
-								System.out.println("Transaction completed successfully");
+								Account transferAccount = dbc.findAccountByAccountId(accountNumber);
+								double transferAccountBalance = transferAccount.getBalance();
+								transferAccountBalance = transferAccountBalance + transfer;
+								transferAccount.setBalance(transferAccountBalance);
+								
+								
+								Date date = new Date();
+								DateFormat df = new SimpleDateFormat("EEEE dd/MM/yyyy HH:mm");
+								Transaction transaction = new Transaction(Transaction.generateTransactionId(), account.getAccountId(), "Tranfer of " + transfer + 
+																														" from account[" + account.getAccountId() + "] to account[" 
+																														+ transferAccount.getAccountId() + "]. "  +
+																														"Balance - " + account.getBalance() + " as of " +
+																														df.format(date));
+								
+								Transaction transferTransaction = new Transaction(Transaction.generateTransactionId(), transferAccount.getAccountId(), "Tranfer of " + transfer + 
+																															" to account[" + transferAccount.getAccountId() + "] from account[" 
+																															+ account.getAccountId() + "]. "  +
+																															"Balance - " + transferAccount.getBalance() + " as of " +
+																															df.format(date));
+								
+								if(dbc.addTransaction(transaction) && dbc.addTransaction(transferTransaction)) {
+									System.out.println(ColorsUtility.TEXT_RESET);
+									System.out.println(transaction.toString());
+									System.out.println(transferTransaction.toString());
+									
+									System.out.println("Transaction completed successfully");
+								}
+								break;
+							} else {
+								System.out.println(ColorsUtility.RED + "Not enough funds to transfer that amount" + ColorsUtility.TEXT_RESET);
 							}
-							break;
+							
 						} catch (InputMismatchException e) {
 							System.out.println(ColorsUtility.RED +"Incorrect Input. Please enter a number. : ");
 							scan.nextLine();

@@ -78,8 +78,15 @@ public class ConsolePrinterUtility {
 		System.out.println();
 		lastName = scan.nextLine();
 		
+		while(true) {
 		System.out.print(ColorsUtility.TEXT_RESET + "Address: \n");
 		address = scan.nextLine();
+		 if (address.isBlank() || !isValidStreetAddress(address)) {
+			 System.out.println(ColorsUtility.RED + "Invalid Address. ");
+		 } else {
+			 break;
+		 }
+	}
 		
 		while(true) {
 		System.out.print(ColorsUtility.TEXT_RESET + "Customer Contact Number: * Follow format ###-###-#### *\n");

@@ -391,5 +391,12 @@ public class ConsolePrinterUtility {
         return m.matches();
     }
 	
+	public static boolean isValidStreetAddress(String address) {
+		String regex = "^(\\d+) ?([A-Za-z](?= ))? (.*?) ([^ ]+?)";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(address);
+		return matcher.matches();
+	}
+	
 }
 

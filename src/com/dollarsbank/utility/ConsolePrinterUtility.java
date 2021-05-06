@@ -70,13 +70,27 @@ public class ConsolePrinterUtility {
 		String password = "";
 		double initialDeposit;
 		
+		while(true) {
 		System.out.print(ColorsUtility.TEXT_RESET + "Customer First Name: ");
 		System.out.println();
 		firstName = scan.nextLine();
+			if (firstName.isBlank()) {
+				 System.out.println(ColorsUtility.RED + "Nothing was entered ");
+			 } else {
+				 break;
+			 }
+		}
 		
+		while(true) {
 		System.out.print(ColorsUtility.TEXT_RESET + "Customer Last Name: ");
 		System.out.println();
 		lastName = scan.nextLine();
+			if (lastName.isBlank()) {
+				 System.out.println(ColorsUtility.RED + "Nothing was entered ");
+			 } else {
+				 break;
+			 }
+		}
 		
 		while(true) {
 		System.out.print(ColorsUtility.TEXT_RESET + "Address: \n");
